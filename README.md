@@ -23,7 +23,7 @@ O sistema permitirá que o usuário:
 
 ## 🧩 Tecnologias Utilizadas
 
-- **Linguagem:** [Python 3.12.12](https://www.python.org/) - A verificar
+- **Linguagem:** [Python 3.13.5](https://www.python.org/)
 - **Framework Web:** [Flask](https://flask.palletsprojects.com/)
 - **Protocolo de Transferência:** [FTP (File Transfer Protocol)](https://datatracker.ietf.org/doc/html/rfc959)
 - **Front-end:** HTML5, CSS3, JavaScript
@@ -36,7 +36,7 @@ O sistema permitirá que o usuário:
 ### 🔹 Pré-requisitos
 
 Antes de iniciar, certifique-se de ter instalado:
-- Python 3.12.12 
+- Python 3.13.5 
 - Git  
 - Pip (gerenciador de pacotes do Python)
 
