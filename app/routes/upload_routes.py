@@ -6,17 +6,25 @@ import os
 
 upload_bp = Blueprint('upload', __name__, url_prefix="/upload")
 
+# Pasta onde os arquivos serão salvos
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-@upload_bp.route("/", methods=["GET", "POST"])
+# Rota para listar arquivos ativos
+@upload_bp.route("/", methods=["GET"])
+def index():
+    projects = Project.query.filter_by(delete_date=None).all()
+    return render_template("index.html", projects=projects)
+
+# Rota para novo upload
+@upload_bp.route("/new", methods=["GET", "POST"])
 def upload_file():
     if request.method == "POST":
-        file = request.files.get("file")
         project_name = request.form.get("project_name")
+        file = request.files.get("file")
 
-        if not file or file.filename == "":
-            flash("Nenhum arquivo selecionado!", "error")
+        if not project_name or not file or file.filename == "":
+            flash("Preencha todos os campos e selecione um arquivo!", "error")
             return redirect(url_for("upload.upload_file"))
 
         filepath = os.path.join(UPLOAD_FOLDER, file.filename)
@@ -30,7 +38,7 @@ def upload_file():
         db.session.add(new_project)
         db.session.commit()
 
-        flash("Upload realizado com sucesso!", "success")
-        return redirect(url_for("upload.upload_file"))
+        flash("Arquivo enviado com sucesso!", "success")
+        return redirect(url_for("upload.index"))
 
     return render_template("upload.html")
